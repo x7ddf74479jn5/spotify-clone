@@ -3,12 +3,14 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: {
     project: "./tsconfig.json",
+    extraFileExtensions: [".mjs"],
   },
-  plugins: ["simple-import-sort", "testing-library"],
+  settings: { tailwindcss: { groupByResponsive: true } },
+  plugins: ["simple-import-sort", "tailwindcss"],
   extends: [
     "plugin:@typescript-eslint/recommended",
     "next/core-web-vitals",
-    "plugin:storybook/recommended",
+    "plugin:tailwindcss/recommended",
     "prettier",
   ],
   rules: {
@@ -40,7 +42,6 @@ module.exports = {
       },
     ],
     "import/newline-after-import": "error",
-    "import/no-default-export": "error",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "@typescript-eslint/no-explicit-any": "off",
@@ -92,7 +93,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["playwright.config.ts", "src/pages/**/*.ts(x)", "next.config.mjs"],
+      files: ["src/pages/**/*.ts(x)", "next.config.mjs"],
       rules: { "import/no-default-export": "off" },
     },
     {
@@ -105,10 +106,6 @@ module.exports = {
           { selector: "variable", types: ["boolean"], format: ["PascalCase"], prefix: ["is", "has", "should"] },
         ],
       },
-    },
-    {
-      files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
-      extends: ["plugin:testing-library/react"],
     },
   ],
 };
