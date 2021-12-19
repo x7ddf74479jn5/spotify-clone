@@ -7,6 +7,11 @@ export const Home: React.VFC = () => {
         <title>Spotify</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div>
+        {/* Sidebar */}
+        {/* Center */}
+      </div>
+      <div className="">{/* Player */}</div>
     </>
   );
 };
