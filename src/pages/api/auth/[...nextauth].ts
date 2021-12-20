@@ -67,9 +67,6 @@ export default NextAuth({
       return await refreshAccessToken(token);
     },
     async session({ session, token }) {
-      if (!session?.user?.accessToken || !session.user.refreshToken || !session.user.username) {
-        throw new Error();
-      }
       session.user.accessToken = token.accessToken;
       session.user.refreshToken = token.refreshToken;
       session.user.username = token.username;
