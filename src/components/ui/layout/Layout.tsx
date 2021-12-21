@@ -7,12 +7,14 @@ import { Header } from "./Header";
 export const Layout: CustomLayout = (page) => {
   return (
     <div className="overflow-hidden min-h-screen bg-black">
-      <Header />
-      <main>
+      <main className="flex">
         <Sidebar />
-        {page}
+        <div className="flex-grow text-white">
+          <Header />
+          {page}
+          <Footer />
+        </div>
       </main>
-      <Footer />
     </div>
   );
 };
