@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { HeartIcon, HomeIcon, LibraryIcon, PlusCircleIcon, RssIcon, SearchIcon } from "@heroicons/react/outline";
-import { signOut, useSession } from "next-auth/react";
-import { SidebarMenuItems } from "src/components/ui/layout/Sidebar/SidebarMenuItems";
+import { signOut } from "next-auth/react";
+import { Playlists } from "src/components/model/Playlist";
+
+import { SidebarMenuItems } from "./SidebarMenuItems";
 
 const menuItems = {
   first: [
@@ -47,17 +49,14 @@ const menuItems = {
 };
 
 export const Sidebar = () => {
-  const { data: session, status } = useSession();
-
   return (
-    <div className="p-5 text-sm text-gray-500 border-r border-gray-900">
+    <div className="overflow-y-scroll p-5 h-screen text-sm text-gray-500 border-r border-gray-900 scrollbar-hide">
       <div className="space-y-4">
         {Object.values(menuItems).map((items, index) => (
           <SidebarMenuItems items={items} key={index} />
         ))}
 
-        {/* Playlists */}
-        <p className="hover:text-white cursor-pointer">Playlists... </p>
+        <Playlists />
       </div>
     </div>
   );

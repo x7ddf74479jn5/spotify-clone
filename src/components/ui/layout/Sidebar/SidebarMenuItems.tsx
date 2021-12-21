@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import { SidebarMenuItem } from "./SidebarMenuItem";
 
 type SidebarMenuItemsProps = {
@@ -10,7 +12,7 @@ type SidebarMenuItemsProps = {
   >;
 };
 
-export const SidebarMenuItems: React.VFC<SidebarMenuItemsProps> = ({ items }) => {
+export const SidebarMenuItems: React.VFC<SidebarMenuItemsProps> = memo(({ items }) => {
   return (
     <>
       {items.map((item, index) => {
@@ -20,4 +22,6 @@ export const SidebarMenuItems: React.VFC<SidebarMenuItemsProps> = ({ items }) =>
       <hr className="border-gray-900 border-t-[0.1px]" />
     </>
   );
-};
+});
+
+SidebarMenuItems.displayName = "SidebarMenuItems";
