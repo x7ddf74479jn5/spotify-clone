@@ -1,7 +1,6 @@
 import type { CustomLayout } from "next";
 import { Sidebar } from "src/components/ui/layout/Sidebar/Sidebar";
 
-import { Footer } from "./Footer";
 import { Header } from "./Header";
 
 export const Layout: CustomLayout = (page) => {
@@ -9,10 +8,9 @@ export const Layout: CustomLayout = (page) => {
     <div className="overflow-hidden min-h-screen bg-black">
       <main className="flex">
         <Sidebar />
-        <div className="flex-grow text-white">
+        <div className="overflow-y-scroll flex-grow h-screen text-white scrollbar-hide">
           <Header />
           {page}
-          <Footer />
         </div>
       </main>
     </div>
