@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Songs } from "src/components/model/Songs";
 
 import { useHome } from "./Home.hook";
 
@@ -18,7 +19,9 @@ export const Home: React.VFC = () => {
           <h1 className="text-2xl font-bold md:text-3xl xl:text-5xl">{playlist?.name}</h1>
         </div>
       </section>
-      <div className="">{/* <Songs /> */}</div>
+      <div className="">
+        <Songs />
+      </div>
     </>
   );
 };
