@@ -1,18 +1,12 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { HeartIcon, HomeIcon, LibraryIcon, PlusCircleIcon, RssIcon, SearchIcon } from "@heroicons/react/outline";
-import { signOut } from "next-auth/react";
 import { Playlists } from "src/components/model/Playlist";
 
 import { SidebarMenuItems } from "./SidebarMenuItems";
 
 const menuItems = {
   first: [
-    {
-      Icon: HomeIcon,
-      label: "Log out",
-      onClick: () => signOut(),
-    },
     {
       Icon: HomeIcon,
       label: "Home",
@@ -50,7 +44,7 @@ const menuItems = {
 
 export const Sidebar = () => {
   return (
-    <div className="overflow-y-scroll p-5 h-screen text-sm text-gray-500 border-r border-gray-900 scrollbar-hide">
+    <div className="hidden overflow-y-scroll p-5 h-screen text-sm text-gray-500 border-r border-gray-900 md:inline-flex lg:text-sm scrollbar-hide sm:max-w-[12rem] lg:max-w-[15rem]">
       <div className="space-y-4">
         {Object.values(menuItems).map((items, index) => (
           <SidebarMenuItems items={items} key={index} />
