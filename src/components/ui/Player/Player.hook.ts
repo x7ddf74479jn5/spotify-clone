@@ -2,7 +2,12 @@ import { debounce } from "lodash";
 import type { ChangeEventHandler, MouseEventHandler } from "react";
 import { useCallback, useEffect, useState } from "react";
 import type SpotifyWebApi from "spotify-web-api-node";
-import { useCurrentTrackIdState, useIsPlayingState } from "src/atoms/songAtom";
+import {
+  useCurrentTrackIdState,
+  useIsPlayingState,
+  useSetCurrentTrackId,
+  useSetIsPlayingMutators,
+} from "src/atoms/songAtom";
 import { useSongInfo } from "src/hooks/useSongInfo";
 import { useSpotify } from "src/hooks/useSpotify";
 
@@ -41,8 +46,10 @@ const useVolume = (spotifyApi: SpotifyWebApi) => {
 
 export const usePlayer = () => {
   const spotifyApi = useSpotify();
-  const [currentTrackId, setCurrentTrackId] = useCurrentTrackIdState();
-  const [isPlaying, setIsPlaying] = useIsPlayingState();
+  const currentTrackId = useCurrentTrackIdState();
+  const setCurrentTrackId = useSetCurrentTrackId();
+  const isPlaying = useIsPlayingState();
+  const { setIsPlaying, pause, start } = useSetIsPlayingMutators();
   const volumeController = useVolume(spotifyApi);
   const { setVolume } = volumeController;
 
@@ -73,13 +80,13 @@ export const usePlayer = () => {
     spotifyApi.getMyCurrentPlaybackState().then((data) => {
       if (data.body.is_playing) {
         spotifyApi.pause();
-        setIsPlaying(false);
+        pause();
       } else {
         spotifyApi.play();
-        setIsPlaying(true);
+        start();
       }
     });
-  }, [setIsPlaying, spotifyApi]);
+  }, [pause, spotifyApi, start]);
 
   return {
     songInfo,

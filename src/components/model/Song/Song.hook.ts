@@ -1,14 +1,21 @@
-import { useCurrentTrackIdState, useIsPlayingState } from "src/atoms/songAtom";
+import {
+  useCurrentTrackIdState,
+  useIsPlayingState,
+  useSetCurrentTrackId,
+  useSetIsPlayingMutators,
+} from "src/atoms/songAtom";
 import { useSpotify } from "src/hooks/useSpotify";
 
 export const useSong = (track: SpotifyApi.PlaylistTrackObject) => {
   const spotifyApi = useSpotify();
-  const [currentTrackId, setCurrentTrackId] = useCurrentTrackIdState();
-  const [isPlaying, setIsPlaying] = useIsPlayingState();
+  const currentTrackId = useCurrentTrackIdState();
+  const setCurrentTrackId = useSetCurrentTrackId();
+  const isPlaying = useIsPlayingState();
+  const { start } = useSetIsPlayingMutators();
 
   const handlePlaySong = () => {
     setCurrentTrackId(track.track.id);
-    setIsPlaying(true);
+    start();
     spotifyApi.play({
       uris: [track.track.uri],
     });

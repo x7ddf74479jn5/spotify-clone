@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useCurrentTrackIdValue } from "src/atoms/songAtom";
+import { useCurrentTrackIdState } from "src/atoms/songAtom";
 import { useSpotify } from "src/hooks/useSpotify";
 
 export const useSongInfo = () => {
   const spotifyApi = useSpotify();
-  const currentTrackId = useCurrentTrackIdValue();
+  const currentTrackId = useCurrentTrackIdState();
   const [songInfo, setSongInfo] = useState<SpotifyApi.TrackObjectFull | null>(null);
 
   useEffect(() => {
